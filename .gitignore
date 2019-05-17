@@ -183,3 +183,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+bitbots_bringup/pylon5
