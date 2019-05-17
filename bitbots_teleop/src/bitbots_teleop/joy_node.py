@@ -13,7 +13,7 @@ from bitbots_msgs.msg import JointCommand
 
 
 class JoyNode(object):
-    """ This node controls the roboter via Gamepad. 
+    """ This node controls the roboter via Gamepad.
     """
 
     #TODO read max values from config
@@ -40,11 +40,11 @@ class JoyNode(object):
         self.walk_msg.linear.x = 0.0
         self.walk_msg.linear.y = 0.0
         self.walk_msg.linear.z = 0.0
-        
+
         self.walk_msg.angular.x = 0.0
         self.walk_msg.angular.y = 0.0
         self.walk_msg.angular.z = 0.0
-        
+
         self.head_pub = rospy.Publisher("/head_motor_goals", JointCommand, queue_size=1)
         self.head_msg = JointCommand()
         self.head_msg.max_currents = [-1] * 2
@@ -57,7 +57,7 @@ class JoyNode(object):
         self.anim_goal.hcm = False
 
         first_try = self.anim_client.wait_for_server(rospy.Duration(1))
-        
+
         if not first_try:
             rospy.logerr(
                 "Animation Action Server not running! Teleop can not work without animation action server. "
@@ -72,13 +72,13 @@ class JoyNode(object):
         self.anim_goal.animation = name
         self.anim_client.send_goal(self.anim_goal)
         self.anim_client.wait_for_result()
-    
+
     def send_text(self, text):
         self.speak_msg.text = text
         self.speak_pub.publish(self.speak_msg)
         # don't send it multiple times
         rospy.sleep(0.1)
-    
+
     def joint_state_cb(self, msg):
         i = 0
         for joint_name in msg.name:
