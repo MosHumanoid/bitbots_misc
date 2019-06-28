@@ -1,0 +1,21 @@
+<library path="src">
+    <class name="SystemMonitorPlugin"
+           type="system_monitor_gui.rqt_plugin.SystemMonitorPlugin"
+           base_class_type="rqt_gui_py::Plugin">
+        <description>
+            An RQT gui to visualize system_monitor messages from multiple hosts
+        </description>
+        <qtgui>
+
+            <group>
+                <label>Introspection</label>
+                <icon type="theme">folder</icon>
+                <statustip>Plugins related to RoboCup.</statustip>
+            </group>
+            <label>System Monitor</label>
+            <icon type="theme">preferences-system-network</icon>
+            <statustip>A plugin to visualize system_monitor messages from multiple hosts</statustip>
+
+        </qtgui>
+    </class>
+</library>

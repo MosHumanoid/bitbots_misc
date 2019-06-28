@@ -22,3 +22,11 @@ generate_messages (
 )
 
 catkin_package(CATKIN_DEPENDS std_msgs message_runtime)
+
+install(FILES rqt_plugin_system_monitor.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
+install(DIRECTORY resources
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
