@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from system_monitor.msg import Cpu as CpuMsg
+from bitbots_msgs.msg import Cpu as CpuMsg
 
 _prev_total = defaultdict(int)
 _prev_busy = defaultdict(int)
@@ -18,7 +18,7 @@ def collect_all():
         cpu_total = sum(timings)
         del timings[3:5]
         cpu_busy = sum(timings)
-        cpu_usage = _calculate_usage(cpu, cpu_total, cpu_busy)
+        cpu_usage = str(_calculate_usage(cpu, cpu_total, cpu_busy)) # TODO make float
 
         msgs.append(CpuMsg(
             cpu_name=cpu,

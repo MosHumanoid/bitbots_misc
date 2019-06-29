@@ -2,7 +2,7 @@
 import socket
 import rospy
 
-from system_monitor.msg import Workload as WorkloadMsg
+from bitbots_msgs.msg import Workload as WorkloadMsg
 from system_monitor import cpus, memory, network_interfaces
 
 
