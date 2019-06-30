@@ -1,5 +1,3 @@
-SEND_DELAY: 50 # all udp packages are send every n milliseconds
-RECEIVE_TIMEOUT: 1.0 # receive timeout in seconds
 FIELD_IMAGE: field2018Lines.png # the field image
 FIELD_SCALE: 0.01 # converts cm to m if one pixel = 1cm
 DEFAULT_POSITIONS:
