@@ -1,3 +1,0 @@
-<launch>
-    <node pkg="bitbots_live_tool_rqt" type="live_tool_udp.py" name="live_tool" output="screen" />
-</launch>

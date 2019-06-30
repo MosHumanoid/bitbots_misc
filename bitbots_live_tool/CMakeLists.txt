@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(bitbots_live_tool_rqt)
+project(bitbots_live_tool)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
@@ -7,15 +7,15 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 )
 
-catkin_python_setup()
-
 catkin_package(CATKIN_DEPENDS message_runtime)
+
+catkin_python_setup()
 
 install(FILES plugin.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-install(DIRECTORY resource
+install(DIRECTORY resources
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

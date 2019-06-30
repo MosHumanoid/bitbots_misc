@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>bitbots_live_tool_rqt</name>
-  <version>0.0.0</version>
-  <description>The bitbots_live_tool_rqt package</description>
+  <name>bitbots_live_tool</name>
+  <version>1.0.0</version>
+  <description>This package provides a comprehensive overview of the current game-state</description>
 
   <maintainer email="6stelter@informatik.uni-hamburg.de">Sebastian Stelter</maintainer>
   <maintainer email="info@bit-bots.de">Hamburg Bit-Bots</maintainer>
@@ -18,6 +18,7 @@
   <build_depend>rqt_gui_py</build_depend>
   <build_depend>message_generation</build_depend>
   <depend>std_msgs</depend>
+  <depend>python-inflect</depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>rosnode</exec_depend>
   <exec_depend>rqt_gui</exec_depend>
