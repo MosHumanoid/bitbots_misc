@@ -1,5 +1,5 @@
 import rospy
-from system_monitor.msg import NetworkInterface as NetworkInterfaceMsg
+from bitbots_msgs.msg import NetworkInterface as NetworkInterfaceMsg
 
 _msg_cache = {}
 

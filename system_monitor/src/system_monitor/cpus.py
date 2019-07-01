@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from system_monitor.msg import Cpu as CpuMsg
+from bitbots_msgs.msg import Cpu as CpuMsg
 
 _prev_total = defaultdict(int)
 _prev_busy = defaultdict(int)
@@ -22,7 +22,8 @@ def collect_all():
 
         msgs.append(CpuMsg(
             cpu_name=cpu,
-            cpu_usage=cpu_usage
+            cpu_usage=str(cpu_usage),
+            temperature='0'
         ))
 
     return running_processes, msgs

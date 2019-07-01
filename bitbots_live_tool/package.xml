@@ -19,6 +19,8 @@
   <build_depend>message_generation</build_depend>
   <depend>std_msgs</depend>
   <depend>python-inflect</depend>
+  <depend>python-pyqtgraph</depend>
+  <depend>bitbots_msgs</depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>rosnode</exec_depend>
   <exec_depend>rqt_gui</exec_depend>

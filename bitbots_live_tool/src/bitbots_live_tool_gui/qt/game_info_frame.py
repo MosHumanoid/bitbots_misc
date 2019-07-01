@@ -7,8 +7,8 @@ from humanoid_league_msgs.msg import GameState
 
 
 class GameInfoFrame(QFrame):
-    def __init__(self, parent):
-        super(GameInfoFrame, self).__init__(parent)
+    def __init__(self, parent, *args, **kwargs):
+        super(GameInfoFrame, self).__init__(parent, *args, **kwargs)
         self.parent = parent
 
         self.namespace = None   # type: str
@@ -23,8 +23,7 @@ class GameInfoFrame(QFrame):
                           "Choosing first ({}) to listen to".format(len(topics), topics[0]),
                           logger_name=self.__class__.__name__)
 
-        if self.subscriber is None or \
-                self.subscriber.name != topics[0]:
+        if self.subscriber is None or self.subscriber.name != topics[0]:
             if self.subscriber is not None:
                 self.subscriber.unregister()
             self.subscriber = rospy.Subscriber(topics[0], GameState, self.__gamestate_cb,

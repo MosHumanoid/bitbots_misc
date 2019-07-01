@@ -109,20 +109,48 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="robotsOverview">
-      <property name="accessibleName">
-       <string/>
-      </property>
+     <widget class="QWidget" name="systemTab">
       <attribute name="title">
-       <string>Robots Overview</string>
+       <string>System</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Tab 2</string>
-      </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QWidget" name="networkWiget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QGraphicsView" name="graphicsView_3"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="gpuWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QGraphicsView" name="graphicsView"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="memoryWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QGraphicsView" name="graphicsView_2"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="CpuWidget" name="cpuWidget" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="PlotWidget" name="cpuGraphicsView"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -150,6 +178,20 @@
     <signal>availableNamespacesChanged(QList)</signal>
    </slots>
   </customwidget>
+  <customwidget>
+   <class>CpuWidget</class>
+   <extends>QWidget</extends>
+   <header>bitbots_live_tool_gui.qt.system_tab</header>
+   <container>1</container>
+   <slots>
+    <slot>setNamespace(QString)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>PlotWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
@@ -166,6 +208,22 @@
     <hint type="destinationlabel">
      <x>829</x>
      <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>namespaceSelect</sender>
+   <signal>namespaceChanged(QString)</signal>
+   <receiver>cpuWidget</receiver>
+   <slot>setNamespace(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>528</y>
     </hint>
    </hints>
   </connection>

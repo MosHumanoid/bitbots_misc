@@ -44,7 +44,7 @@ class NamespaceSelect(QComboBox):
         for ns in namespaces:
             self.parent.namespaceSelect.addItem(ns)
 
-        rospy.loginfo("available namespaces updated", logger_name=self.__class__.__name__)
+        rospy.loginfo("Available namespaces updated", logger_name=self.__class__.__name__)
         self.__on_item_selected(0)
 
     def __on_item_selected(self, i):
