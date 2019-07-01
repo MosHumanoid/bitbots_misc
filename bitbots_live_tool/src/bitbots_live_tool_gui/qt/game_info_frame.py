@@ -2,7 +2,7 @@ import rospy
 import rostopic
 import inflect
 from python_qt_binding.QtWidgets import QFrame
-from python_qt_binding.QtCore import QTimer
+from python_qt_binding.QtCore import QTimer, pyqtSlot
 from humanoid_league_msgs.msg import GameState
 
 
@@ -11,17 +11,17 @@ class GameInfoFrame(QFrame):
         super(GameInfoFrame, self).__init__(parent)
         self.parent = parent
 
+        self.namespace = None   # type: str
         self.subscriber = None  # type: rospy.Subscriber
-        self.__update_timer = QTimer(self)
-        self.__update_timer.timeout.connect(self.__update_subscribers)
-        self.__update_timer.start(5000)
 
-    def __update_subscribers(self):
-        topics = rostopic.find_by_type("humanoid_league_msgs/GameState")
+    def __update_subscriber(self):
+        topics = [t for t in rostopic.find_by_type("humanoid_league_msgs/GameState")
+                  if str(t).startswith(self.namespace)]
 
         if len(topics) > 1:
             rospy.logwarn("{} topics are publishing humanoid_league_msgs/GameState msgs. "
-                          "Choosing first ({}) to listen to".format(len(topics), topics[0]))
+                          "Choosing first ({}) to listen to".format(len(topics), topics[0]),
+                          logger_name=self.__class__.__name__)
 
         if self.subscriber is None or \
                 self.subscriber.name != topics[0]:
@@ -39,6 +39,7 @@ class GameInfoFrame(QFrame):
 
         self.setScore(msg.ownScore, msg.rivalScore)
 
+    @pyqtSlot(int)
     def setHalftime(self, halftime):
         """
         Set current halftime number (1st, 2nd, ...)
@@ -47,6 +48,7 @@ class GameInfoFrame(QFrame):
         e = inflect.engine()
         self.parent.halftimeLabel.setText("{} halftime".format(e.ordinal(halftime)))
 
+    @pyqtSlot(int, int)
     def setTime(self, minutes, seconds):
         """
         Set current gametime
@@ -54,7 +56,9 @@ class GameInfoFrame(QFrame):
         :type seconds: int
         """
         self.parent.timeLabel.setText("{}:{} / 10:00".format(minutes, seconds))
+        rospy.logdebug("set time to '{}:{} / 10:00'".format(minutes, seconds), logger_name=self.__class__.__name__)
 
+    @pyqtSlot(int, int)
     def setScore(self, us, them):
         """
         Set current game score meaning how many goals each team scored
@@ -64,3 +68,14 @@ class GameInfoFrame(QFrame):
         :type us: int
         """
         self.parent.scoreLabel.setText("{}:{}".format(us, them))
+        rospy.logdebug("set score to '{}:{}'".format(us, them), logger_name=self.__class__.__name__)
+
+    @pyqtSlot(str)
+    def setNamespace(self, ns):
+        """
+        Set namsepace under which a GameState message is published
+        :type ns: str
+        """
+        self.namespace = ns
+        self.__update_subscriber()
+        rospy.logdebug("set topic namespace to {}".format(ns), logger_name=self.__class__.__name__)

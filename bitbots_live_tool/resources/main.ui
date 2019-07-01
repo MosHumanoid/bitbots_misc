@@ -15,7 +15,17 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="topbarLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Namespace</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="NamespaceSelect" name="namespaceSelect"/>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -31,6 +41,9 @@
      </item>
      <item>
       <widget class="GameInfoFrame" name="gameInfoFrame">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
@@ -83,25 +96,18 @@
        </layout>
       </widget>
      </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
     </layout>
    </item>
    <item>
     <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
      <widget class="QWidget" name="robotsOverview">
       <property name="accessibleName">
@@ -110,11 +116,13 @@
       <attribute name="title">
        <string>Robots Overview</string>
       </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4"/>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3"/>
      </widget>
     </widget>
    </item>
@@ -130,9 +138,36 @@
     <slot>setHalftime(QInt8)</slot>
     <slot>setTime(QInt8,QInt8)</slot>
     <slot>setScore(QInt8,QInt8)</slot>
+    <slot>setNamespace(QString)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>NamespaceSelect</class>
+   <extends>QComboBox</extends>
+   <header>bitbots_live_tool_gui.qt.namespace_select</header>
+   <slots>
+    <signal>namespaceChanged(QString)</signal>
+    <signal>availableNamespacesChanged(QList)</signal>
    </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>namespaceSelect</sender>
+   <signal>namespaceChanged(QString)</signal>
+   <receiver>gameInfoFrame</receiver>
+   <slot>setNamespace(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>829</x>
+     <y>27</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
